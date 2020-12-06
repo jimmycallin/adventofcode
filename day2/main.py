@@ -2,7 +2,7 @@ import re
 
 # 1
 
-with open("codes.txt") as f:
+with open("input.txt") as f:
     n_valids = 0
     for line in f:
         min, max, letter, input = re.split(r"[\s:-]\s?", line.strip())
@@ -13,7 +13,7 @@ with open("codes.txt") as f:
 
 # 2
 
-with open("codes.txt") as f:
+with open("input.txt") as f:
     n_valids = 0
     for line in f:
         i1, i2, letter, input = re.split(r"[\s:-]\s?", line.strip())
