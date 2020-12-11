@@ -12,10 +12,13 @@ def get_adj_dir(seats, i, j, dir_y, dir_x):
         return None
 
     curr = "."
-    while curr != ".":
+    while curr == ".":
         i = i + dir_y
         j = j + dir_x
-        curr = seats[i][j]
+        if i >= 0 and i < len(seats) and j >= 0 and j < len(seats[i]):
+            curr = seats[i][j]
+        else:
+            curr = None
     return curr
 
 
@@ -37,7 +40,7 @@ def next_state(seats, i, j):
     if curr == "#":
         adjacents = get_adjacents(seats, i, j)
         n_free = sum(1 for x in adjacents if x == "#")
-        if n_free >= 4:
+        if n_free >= 5:
             return "L"
         return curr
     if curr == "L":
@@ -86,5 +89,6 @@ with open("input.txt") as f:
         for i in range(len(prev_state_seats)):
             for j in range(len(prev_state_seats[i])):
                 next_state_seats[i][j] = next_state(prev_state_seats, i, j)
+        # print("---")
         # print_seats(next_state_seats)
-    print("1:", n_occupied(next_state_seats))
+    print("2:", n_occupied(next_state_seats))
