@@ -17,23 +17,25 @@ with open("input.txt") as f:
 # 13 % t == 2
 # 19 % t == 3
 
+
+def crt(pairs):
+    M = 1
+    for x, mx in pairs:
+        M *= mx
+    total = 0
+    for x, mx in pairs:
+        b = M // mx
+        total += x * b * pow(b, mx-2, mx)
+        total %= M
+    return total
+
 with open("input.txt") as f:
     bus_ids = [
         (int(y), x)
         for x, y in enumerate(f.readlines()[1].strip().split(","))
         if y[0] != "x"
     ]
-
-    common_denominator = bus_ids[0][0]
-    largest_jump = max(bus_ids)[0]
-    print("largest", largest_jump)
-    y = max(bus_ids)[1]
-    i = 0
-    found = False
-    while not found:
-        found = all(
-            ((largest_jump * i - y) + offset) % bus_id == 0
-            for bus_id, offset in bus_ids
-        )
-        i += 1
-    print("2:", i + common_denominator)
+    pairs = []
+    for n, i in bus_ids:
+        pairs.append((n - i, n))
+    print("2:", crt(pairs))
