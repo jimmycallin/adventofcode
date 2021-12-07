@@ -13,8 +13,8 @@ def distance(dist):
 
 
 with open("input.txt") as f:
-    ns = sorted([int(x) for x in f.read().split(",")])
-    minval, maxval = ns[0], ns[-1]
+    ns = [int(x) for x in f.read().split(",")]
+    minval, maxval = min(ns), max(ns)
     print(
         "2:",
         min((sum(distance(abs(i - x)) for x in ns) for i in range(minval, maxval))),
